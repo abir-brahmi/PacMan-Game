@@ -12,10 +12,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public void AddDot()
-    {
-        _dotAmount++;
-    }
+
 
     public void DeleteDot()
     {
@@ -25,5 +22,6 @@ public class GameManager : MonoBehaviour
             //Win
         }
     }
+
     
 }

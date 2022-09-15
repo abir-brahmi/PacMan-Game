@@ -33,8 +33,7 @@ public class PathSearch : MonoBehaviour
         pacmanNode = grid.NodePosition(rigidbodyPacman.transform.position);
         GhostNode = grid.NodePosition(rigidbodyGhost.transform.position);
 
-        rigidbodyGhost.velocity = transform.forward * moveSpeed;
-        rigidbodyGhost.transform.rotation = Quaternion.Euler(_moveDirection);
+       
 
         if (pacmanNode.posX < GhostNode.posX && grid.isWalkable(GhostNode.posX - 1, GhostNode.posZ) )
         {
@@ -56,9 +55,10 @@ public class PathSearch : MonoBehaviour
         {
             _moveDirection = _up;
         }
+        rigidbodyGhost.velocity = transform.forward * moveSpeed;
+        rigidbodyGhost.transform.rotation = Quaternion.Euler(_moveDirection);
 
 
-       
 
     }
     // Start is called before the first frame update
