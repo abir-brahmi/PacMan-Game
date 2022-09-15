@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+   
     public GameObject bottomLeft, topRight;
     Node[,] gridNode;
     public LayerMask unwalkable;
@@ -32,7 +33,7 @@ public class Grid : MonoBehaviour
         UpdateGrid();
 
     }
-
+    // update of the grid table with the position of each node and its status
     public void UpdateGrid()
     {
     for (int i = 0; i<=hCells; i++){
@@ -58,15 +59,32 @@ public class Grid : MonoBehaviour
             }
         }
     }
+
+    // To identify where a given game object is located in relation to the grid 
+    public Node NodePosition(Vector3 pos)
+    {
+        
+        int gridX = (int)Vector3.Distance(new Vector3(Mathf.Round(pos.x), 0, 0), new Vector3(Mathf.Round(xbottomLeft), 0, 0));
+        int gridZ = (int)Vector3.Distance(new Vector3(0, 0, Mathf.Round(pos.z)), new Vector3(0, 0, Mathf.Round(zbottomLeft)));
+        return gridNode[gridX, gridZ];
+    }
+
+    public  bool isWalkable(int x,int y)
+    {
+        return gridNode[x, y].walkable;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }

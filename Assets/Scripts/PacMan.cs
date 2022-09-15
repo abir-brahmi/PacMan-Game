@@ -11,49 +11,44 @@ public class PacMan : MonoBehaviour
     Vector3 _down = new Vector3(0, 180, 0);
     Vector3 _up = Vector3.zero;
     Vector3 _moveDirection = Vector3.zero;
+    public LayerMask unwalkable;
 
-   
+
     void Initialize()
     {
         _moveDirection = Vector3.zero;
-    }
-
-    public Vector3 PacManNode()
-    {
-        int posX = (int)(transform.position. x);
-        int posY = (int)(transform.position.y);
-
-        return (new Vector3(posX, transform.position.y, posY));
-    }
+    }    
+   
 
     void MoveCharacter()
     {
-        RigidbodyPacman.velocity = transform.forward * moveSpeed;
-        transform.rotation = Quaternion.Euler(_moveDirection);
-        
 
-        if (Input.GetAxis("Horizontal") < 0) 
+        if (Input.GetAxis("Horizontal") < 0)
         {
             _moveDirection = _left;
-           
-        }
-        if (Input.GetAxis("Horizontal") > 0) 
-        {
-            _moveDirection = _right;
       
+
         }
-        if (Input.GetAxis("Vertical") > 0) 
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            _moveDirection = _right;       
+
+        }
+        if (Input.GetAxis("Vertical") > 0)
         {
             _moveDirection = _up;
         }
-        if (Input.GetAxis("Vertical") < 0) 
+        if (Input.GetAxis("Vertical") < 0)
         {
             _moveDirection = _down;
         }
-           
- 
+        transform.rotation = Quaternion.Euler(_moveDirection);
+        
+        RigidbodyPacman.velocity = transform.forward * moveSpeed;
 
     }
+
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +58,6 @@ public class PacMan : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveCharacter();   
+        MoveCharacter();
     }
 }
