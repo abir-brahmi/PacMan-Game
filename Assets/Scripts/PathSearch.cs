@@ -5,10 +5,11 @@ using UnityEngine;
 public class PathSearch : MonoBehaviour
 {
     public float moveSpeed;
-    public Rigidbody RigidbodyPacman;
+    public Rigidbody rigidbodyPacman;
+    public Rigidbody rigidbodyGhost;
     Node pacmanNode;
-    Node FantomeNode;
-    public Rigidbody Fantome;
+    Node GhostNode;
+   
     public Grid grid;
     Vector3 _right = new Vector3(0, 90, 0);
     Vector3 _left = new Vector3(0, 270, 0);
@@ -20,8 +21,8 @@ public class PathSearch : MonoBehaviour
     void Initialize()
     {
         _moveDirection = Vector3.zero;
-        pacmanNode = grid.NodePosition(RigidbodyPacman.transform.position);
-        FantomeNode = grid.NodePosition(Fantome.transform.position);
+        pacmanNode = grid.NodePosition(rigidbodyPacman.transform.position);
+        GhostNode = grid.NodePosition(rigidbodyGhost.transform.position);
 
     }
 
@@ -29,29 +30,29 @@ public class PathSearch : MonoBehaviour
 
     void MoveCharacter()
     {
-        pacmanNode = grid.NodePosition(RigidbodyPacman.transform.position);
-        FantomeNode = grid.NodePosition(Fantome.transform.position);
+        pacmanNode = grid.NodePosition(rigidbodyPacman.transform.position);
+        GhostNode = grid.NodePosition(rigidbodyGhost.transform.position);
 
-        Fantome.velocity = transform.forward * moveSpeed;
-        Fantome.transform.rotation = Quaternion.Euler(_moveDirection);
+        rigidbodyGhost.velocity = transform.forward * moveSpeed;
+        rigidbodyGhost.transform.rotation = Quaternion.Euler(_moveDirection);
 
-        if (pacmanNode.posX < FantomeNode.posX && grid.isWalkable(FantomeNode.posX - 1, FantomeNode.posZ) )
+        if (pacmanNode.posX < GhostNode.posX && grid.isWalkable(GhostNode.posX - 1, GhostNode.posZ) )
         {
             
             _moveDirection = _left;
 
         }
-        else if (pacmanNode.posX > FantomeNode.posX && grid.isWalkable(FantomeNode.posX + 1, FantomeNode.posZ))
+        else if (pacmanNode.posX > GhostNode.posX && grid.isWalkable(GhostNode.posX + 1, GhostNode.posZ))
         {
             _moveDirection = _right;
 
         }
-        else if (pacmanNode.posZ < FantomeNode.posZ && grid.isWalkable(FantomeNode.posX, FantomeNode.posZ - 1))
+        else if (pacmanNode.posZ < GhostNode.posZ && grid.isWalkable(GhostNode.posX, GhostNode.posZ - 1))
         {
             _moveDirection = _down;
 
         }
-        else if (pacmanNode.posZ > FantomeNode.posZ && grid.isWalkable(FantomeNode.posX, FantomeNode.posZ + 1))
+        else if (pacmanNode.posZ > GhostNode.posZ && grid.isWalkable(GhostNode.posX, GhostNode.posZ + 1))
         {
             _moveDirection = _up;
         }

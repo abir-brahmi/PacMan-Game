@@ -48,7 +48,15 @@ public class PacMan : MonoBehaviour
 
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+           
+       
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
