@@ -18,6 +18,13 @@ public class PacMan : MonoBehaviour
         _moveDirection = Vector3.zero;
     }
 
+    public Vector3 PacManNode()
+    {
+        int posX = (int)(transform.position. x);
+        int posY = (int)(transform.position.y);
+
+        return (new Vector3(posX, transform.position.y, posY));
+    }
 
     void MoveCharacter()
     {

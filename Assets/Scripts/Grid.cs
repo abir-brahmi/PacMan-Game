@@ -8,13 +8,17 @@ public class Grid : MonoBehaviour
     Node[,] gridNode;
     public LayerMask unwalkable;
 
+    //Grid info 
     int xbottomLeft, zbottomLeft;
     int xtopRight, ztopRight;
+
+    //number of nodes in the grid
     int vCells = 0, hCells =0;
+
     int cellwith = 1;
     int cellHeight = 1;
 
-    void MPGridCreate()
+    void InitializeGrid()
     {
         xbottomLeft = (int)bottomLeft.transform.position.x;
         zbottomLeft = (int)bottomLeft.transform.position.z;
@@ -41,7 +45,7 @@ public class Grid : MonoBehaviour
     }
     void Awake()
     {
-        MPGridCreate();
+        InitializeGrid();
     }
     void OnDrawGizmos()
     {
@@ -50,7 +54,7 @@ public class Grid : MonoBehaviour
             foreach (Node node in gridNode)
             {
                 Gizmos.color = (node.walkable) ? Color.white : Color.red;
-                Gizmos.DrawWireCube(new Vector3(xbottomLeft + node.posX, 0, zbottomLeft + node.posZ), new Vector3(1, 1, 1));
+                Gizmos.DrawWireCube(new Vector3(xbottomLeft + node.posX, 0, zbottomLeft + node.posZ), new Vector3(0.8f, 0.8f, 0.8f));
             }
         }
     }
